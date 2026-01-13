@@ -1,0 +1,49 @@
+#include <bits/stdc++.h>
+using namespace std;
+using namespace std::chrono;
+
+void complexRec(int n) {
+    if (n <= 2) {
+        cout << "Base case reached with n = " << n << endl;
+        return;
+    }
+
+    cout << "Processing n = " << n << endl;
+
+    int p = n;
+    while (p > 0) {
+        vector<int> temp(n);
+        for (int i = 0; i < n; i++) {
+            temp[i] = i ^ p;
+        }
+        cout << "Vector temp created with XOR using p = " << p << endl;
+        p >>= 1;
+    }
+
+    vector<int> small(n);
+    for (int i = 0; i < n; i++) {
+        small[i] = i * i;
+    }
+    cout << "Vector small created with squares up to n = " << n << endl;
+
+    reverse(small.begin(), small.end());
+    cout << "Vector small reversed" << endl;
+
+    complexRec(n / 2);
+    complexRec(n / 2);
+    complexRec(n / 2);
+}
+
+int main() {
+    int n = 16; 
+
+    auto start = high_resolution_clock::now();
+    complexRec(n);
+    auto end = high_resolution_clock::now();
+
+    auto duration = duration_cast<milliseconds>(end - start);
+    cout << "Execution time: " << duration.count() << " ms" << endl;
+
+    return 0;
+}
+//Recurrence Relation = 3T(n/2)
