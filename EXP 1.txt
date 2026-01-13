@@ -46,4 +46,5 @@ int main() {
 
     return 0;
 }
-//Recurrence Relation = 3T(n/2)
+//Recurrence Relation = 3T(n/2)+o(nlogn)
+
